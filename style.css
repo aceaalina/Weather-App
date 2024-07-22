@@ -114,9 +114,15 @@ body {
 }
 
 @media (max-width: 600px) {
+  body {
+    height: 100vh;
+    margin: 0;
+    background-attachment: fixed;
+  }
+
   .container {
     width: 90%;
-    height: auto;
+    height: 100%;
     padding: 10px;
   }
 
@@ -124,7 +130,9 @@ body {
     font-size: 16px;
     padding: 0 10px 0 40px;
   }
-
+  #weather-container {
+    margin-bottom: 100px;
+  }
   #weather-container img {
     width: 100px;
   }
@@ -136,6 +144,7 @@ body {
   #weather-days {
     display: block;
     margin-top: 20px;
+    margin-bottom: 20%;
   }
 
   #weather-days > div {
@@ -149,5 +158,52 @@ body {
 
   #weather-days img {
     width: 60px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  body {
+    background-repeat: repeat;
+  }
+  .container {
+    width: 80%;
+    height: 100%;
+    padding: 15px;
+  }
+
+  .search-box input {
+    font-size: 17px;
+    padding: 0 20px 0 40px;
+  }
+
+  #weather-container {
+    margin-bottom: 100px;
+  }
+  #weather-container img {
+    width: 100px;
+  }
+
+  #weather-container p {
+    font-size: 16px;
+  }
+
+  #weather-days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  #weather-days > div {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+
+  #weather-days p {
+    font-size: 15px;
+  }
+
+  #weather-days img {
+    width: 70px;
   }
 }
