@@ -11,15 +11,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 100vh;
-  background-color: greenyellow;
+  height: 100vh;
+  background: url("https://static.vecteezy.com/system/resources/thumbnails/010/533/814/small/dark-orange-template-with-sky-clouds-vector.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(20px);
 }
+
 .container {
   position: relative;
-  width: 400px;
-  height: 600px;
-  background-color: coral;
+  width: 60%;
+  background: rgba(46, 59, 78, 0.7);
   border-radius: 15px;
+  opacity: 0.9;
   padding: 20px;
   color: white;
 }
@@ -33,57 +37,117 @@ body {
 }
 
 .search-box input {
-  position: absolute;
-  width: 100%;
+  width: calc(100% - 60px);
   height: 100%;
   background: transparent;
-  border: 2px solid grey;
+  border: 2px solid #50597b;
   border-radius: 10px;
   outline: none;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
-  text-transform: uppercase;
   padding: 0 50px 0 50px;
+  color: white;
 }
 
 .search-box input::placeholder {
-  color: white;
+  color: #a1a1a1;
 }
 
 .search-box i {
   position: absolute;
-  left: 10px;
+  left: 15px;
   font-size: 20px;
+  color: #a1a1a1;
 }
+
 .search-box button {
   position: absolute;
-  right: 0;
-  width: 50px;
-  height: 100%;
+  right: 15px;
+  width: 40px;
+  height: 40px;
   background: transparent;
   border: none;
   outline: none;
-  font-size: 26px;
+  font-size: 22px;
   cursor: pointer;
+  color: #a1a1a1;
 }
 
-.weather-container {
+#weather-container {
+  display: flex;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+#weather-container img {
+  width: 120px;
+}
+
+#weather-container p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+#current-weather {
+  align-items: center;
+}
+
+#weather-days {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+#weather-days > div {
+  background-color: #3b4a61;
+  border-radius: 10px;
+  padding: 10px;
   text-align: center;
-  margin: 40px 0;
-}
-.weather-container img {
-  width: 60%;
+  width: 18%;
 }
 
-@media (max-width: 480px) {
+#weather-days p {
+  margin: 5px 0;
+}
+
+#weather-days img {
+  width: 40px;
+}
+
+@media (max-width: 600px) {
   .container {
-    width: 100%;
+    width: 90%;
     height: auto;
     padding: 10px;
   }
 
   .search-box input {
-    font-size: 18px;
+    font-size: 16px;
     padding: 0 10px 0 40px;
+  }
+
+  #weather-container img {
+    width: 100px;
+  }
+
+  #weather-container p {
+    font-size: 16px;
+  }
+
+  #weather-days {
+    display: block;
+    margin-top: 20px;
+  }
+
+  #weather-days > div {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  #weather-days p {
+    font-size: 14px;
+  }
+
+  #weather-days img {
+    width: 60px;
   }
 }

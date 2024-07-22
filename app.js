@@ -66,13 +66,15 @@ function showWeekWeather(weatherDate) {
 
     cardsList += `
       <div id="card-${i}">
-         <p> ${nextWeekDays[i]}</p>
-         <img src="${iconImageUrl}"/>
-         <p> ${curentWeather.weather[0].main}</p>
-         <p> ${curentWeather.main.temp_min}</p>
-          <p> ${curentWeather.main.temp_max}</p>
-           <p> ${curentWeather.main.humidity}</p>
-            <p> ${curentWeather.main.feels_like}</p>
+           <p> ${nextWeekDays[i]}</p>
+           <img src="${iconImageUrl}"/>
+           <p>Temperatura curenta: ${curentWeather.main.temp}</p>
+           <p>Descriere: ${curentWeather.weather[0].main}</p>
+           <p>Minima zilei: ${curentWeather.main.temp_min}</p>
+           <p>Maxima zilei: ${curentWeather.main.temp_max}</p>
+           <p>Temperatura resimtita: ${curentWeather.main.feels_like}</p>
+           <p>Umiditate: ${curentWeather.main.humidity}</p>
+           
           
       </div>
     `;
@@ -85,7 +87,7 @@ function showWeather(weatherDate) {
   const iconImageUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
 
   weatherContainer.innerHTML = `
-  <div>
+  <div class="current-weather">
     <img src="${iconImageUrl}"/>
     <p>Descriere: ${weatherDate.weather[0].description}</p>
     <p>Umiditate: ${weatherDate.main.humidity}</p>
