@@ -46,39 +46,59 @@ function getNextWeekDays() {
   const today = new Date();
   let weekDays = [];
 
-  for (let i = 0; i < 5; i++) {
-    let dayIndex = (today.getDay() + i) % 5;
+  for (let i = 0; i < 7; i++) {
+    let dayIndex = (today.getDay() + i) % 7;
     weekDays.push(daysOfWeek[dayIndex]);
   }
 
   return weekDays;
 }
 
-function showWeekWeather(weatherDate) {
-  const nextWeekDays = getNextWeekDays();
-  let cardsList = " ";
+function roundTemperature(temp) {
+  if (temp % 1 === 0.5) {
+    return Math.ceil(temp);
+  }
+  return Math.round(temp);
+}
 
-  for (let i = 0; i < nextWeekDays.length; i++) {
-    const curentWeather = weatherDate.list[i * 8];
-    console.log(curentWeather);
+function showWeekWeather(weatherData) {
+  const nextWeekDays = getNextWeekDays();
+  let cardsList = "";
+  let currentDate = new Date().toDateString();
+
+  for (let i = 0; i < weatherData.list.length; i += 1) {
+    const curentWeather = weatherData.list[i];
+    const dateTime = new Date(curentWeather.dt_txt);
+    const dayName =
+      nextWeekDays[(dateTime.getDay() - new Date().getDay() + 7) % 7];
+    const isToday = dateTime.toDateString() === currentDate;
+
+    if (i % 8 === 0) {
+      if (i !== 0) {
+        cardsList += `</div></div>`; // Close previous day card
+      }
+      cardsList += `<div class="day-card"><h3>${
+        isToday ? "Today" : dayName
+      }</h3><div class="hour-cards-container">`;
+    }
+
     const iconCode = curentWeather.weather[0].icon;
     const iconImageUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
 
     cardsList += `
-      <div id="card-${i}">
-           <p> ${nextWeekDays[i]}</p>
+      <div class="hour-card">
+           <p>Ora: ${dateTime.getHours()}:00</p>
            <img src="${iconImageUrl}"/>
-           <p>Temperatura curenta: ${curentWeather.main.temp}</p>
-           <p>Descriere: ${curentWeather.weather[0].main}</p>
-           <p>Minima zilei: ${curentWeather.main.temp_min}</p>
-           <p>Maxima zilei: ${curentWeather.main.temp_max}</p>
-           <p>Temperatura resimtita: ${curentWeather.main.feels_like}</p>
+           <p>Temp: ${roundTemperature(curentWeather.main.temp)}</p>
+           <p>Descr: ${curentWeather.weather[0].main}</p>
+           <p>Minima: ${roundTemperature(curentWeather.main.temp_min)}</p>
+           <p>Maxima: ${roundTemperature(curentWeather.main.temp_max)}</p>
            <p>Umiditate: ${curentWeather.main.humidity}</p>
-           
-          
       </div>
     `;
   }
+
+  cardsList += `</div></div>`;
   weatherDays.innerHTML = cardsList;
 }
 
@@ -92,9 +112,11 @@ function showWeather(weatherDate) {
     <p>Descriere: ${weatherDate.weather[0].description}</p>
     <p>Umiditate: ${weatherDate.main.humidity}</p>
     <p>Presiune: ${weatherDate.main.pressure}</p>
-    <p class="temperatura">Temperatura curenta: ${weatherDate.main.temp}</p>
-    <p>Maxima zilei: ${weatherDate.main.temp_max} </p>
-    <p>Minima zilei: ${weatherDate.main.temp_min}</p>
+    <p class="temperatura">Temperatura curenta: ${roundTemperature(
+      weatherDate.main.temp
+    )}</p>
+    <p>Maxima zilei: ${roundTemperature(weatherDate.main.temp_max)} </p>
+    <p>Minima zilei: ${roundTemperature(weatherDate.main.temp_min)}</p>
   </div>
   `;
 }
